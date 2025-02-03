@@ -30,8 +30,14 @@ def start():
     }
 
     # отправка в тг
-    requests.post(url, params=params, files=files)
+    response = requests.post(url, params=params, files=files)
+    print(response.text)
 
 
 if __name__ == '__main__':
-    start()
+    while True:
+        try:
+            start()
+            break
+        except Exception as e:
+            print(f'Ошибка: {e}')

@@ -4,6 +4,15 @@ from datetime import datetime
 import env
 
 
+def edit_date_str(date):
+    date_day, date_month = date.split('.')
+    if date_day[0] == '0':
+        date_day = date_day[1:]
+    if date_month[0] == '0':
+        date_month = date_month[1:]
+    return f'{date_day}.{date_month}'
+
+
 def get_msg():
     '''Получение сообщения для поздравления'''
 
@@ -27,8 +36,10 @@ def get_msg():
     # проверяем строки на совпадение дат
     # и заполняем список для поздравления
     birthdays_data = []
+    today = edit_date_str(today)
     for row in data:
-        if str(row['ДР']) == today:
+        table_date = edit_date_str(str(row['ДР']))
+        if table_date == today:
             birthdays_data.append(row)
 
     # если нет совпадений, возвращаем False
